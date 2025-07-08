@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funny Hacker Login</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Share Tech Mono', monospace;
+}
+body, html {
+  height: 100%;
+  background: black;
+  color: #00ff00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  text-align: center;
+  padding: 20px;
+  border: 2px solid #00ff00;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 15px #00ff00;
+  width: 90%;
+  max-width: 400px;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #00ff00; }
+  50% { box-shadow: 0 0 20px #00ff00; }
+  100% { box-shadow: 0 0 10px #00ff00; }
+}
+h2 {
+  margin-bottom: 20px;
+}
+input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 1px solid #00ff00;
+  background-color: black;
+  color: #00ff00;
+  border-radius: 5px;
+}
+button {
+  padding: 10px 20px;
+  background-color: black;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #00ff00;
+  color: black;
+}
+.blackout {
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.success {
+  color: #00ff00;
+  font-size: 2.5rem;
+  animation: blink 1s step-start infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container" id="login-container">
+    <h2 id="prompt">Enter Password</h2>
+    <input type="text" id="userInput" placeholder="Type here...">
+    <button onclick="nextStep()">Enter</button>
+  </div>  <script>
+    let step = 0;
+    const validSteps = [
+      "Password",
+      "Wrong Password",
+      "Correct Password",
+      "Sorry!"
+    ];
+
+    function nextStep() {
+      const input = document.getElementById("userInput").value.trim();
+      const container = document.getElementById("login-container");
+      const prompt = document.getElementById("prompt");
+
+      if (input === validSteps[step]) {
+        step++;
+        if (step === validSteps.length) {
+          document.body.innerHTML = `<div class='blackout' style='display:flex;justify-content:center;align-items:center;'><span class='success'>Success</span></div>`;
+        } else {
+          prompt.textContent = step === 1 ? "Enter Wrong Password" : step === 2 ? "Enter Correct Password" : "Sorry!";
+          document.getElementById("userInput").value = "";
+        }
+      } else {
+        // Show black screen with nothing
+        document.body.innerHTML = "<div class='blackout'></div>";
+      }
+    }
+  </script></body>
+</html>
